@@ -198,4 +198,10 @@ Chaque script prend `-OktaOrgUrl` (URL du tenant, ex: `https://dev-12345.okta.co
 `-ApiToken` (jeton API Okta en SecureString, généré dans Security > API > Tokens) — jamais en
 argument de ligne de commande en clair, même discipline que les mots de passe AD du reste du
 repo.
+
+**Prochaine étape (à faire avant de tester)** : `-OktaOrgUrl` est déjà connu
+(`https://integrator-5794983.okta.com`, repris de
+[Okta-SSO-Debug-Lab](https://github.com/Anne-LaureS/Okta-SSO-Debug-Lab)/`iam-debug/environments/demo.bru`)
+— il reste à générer un jeton API dans la console Okta (Security > API > Tokens) pour lancer les
+premiers tests réels.
 | DeviceLost / DeviceFound | `Set-DeviceStatus.ps1` : active/désactive l'objet ordinateur AD | Hors périmètre | — | Okta ne gère pas les objets ordinateur AD ; la Devices API Okta couvre les appareils enrôlés MDM, un concept différent |
