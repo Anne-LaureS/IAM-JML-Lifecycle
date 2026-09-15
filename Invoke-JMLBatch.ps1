@@ -121,7 +121,10 @@ foreach ($row in $rows) {
         SamAccountName = if ($itemResult.SamAccountName) { $itemResult.SamAccountName } else { $row.SamAccountName }
         AssetTag       = $row.AssetTag
         Status         = $itemResult.Status
-        Detail         = (($itemResult | Select-Object -Property * -ExcludeProperty Status, Error, SamAccountName, FirstName, LastName | Out-String).Trim() -replace '\s+', ' ')
+        # TempPassword exclu du rapport persisté : un mot de passe temporaire n'a rien à faire
+        # dans un fichier partagé/relu par d'autres que la personne qui l'a communiqué au
+        # joiner — il reste visible uniquement dans la sortie console de New-Joiner.ps1.
+        Detail         = (($itemResult | Select-Object -Property * -ExcludeProperty Status, Error, SamAccountName, FirstName, LastName, TempPassword | Out-String).Trim() -replace '\s+', ' ')
         Error          = $itemResult.Error
     })
 }

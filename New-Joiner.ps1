@@ -174,6 +174,7 @@ try {
     $result.Status = if ($WhatIf) { "WhatIf" } else { "Success" }
 
     Write-Host "=== Joiner créé : $samAccountName ($Department) -> $($result.GroupsAssigned) ===" -ForegroundColor Green
+    Write-Host "Mot de passe temporaire (à communiquer de façon sécurisée, jamais conservé dans les rapports) : $tempPassword" -ForegroundColor Yellow
 }
 catch {
     $result.Error = $_.Exception.Message

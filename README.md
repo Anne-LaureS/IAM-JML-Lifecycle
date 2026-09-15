@@ -131,7 +131,10 @@ demande séparément, le birthright reste du moindre privilège.
   entreprise pour ce cas, plus sûr qu'un `ModifyRequest` LDAP brut avec mot de passe encodé
   manuellement en UTF-16LE.
 - Mot de passe temporaire généré aléatoirement (respect de la complexité AD par défaut),
-  `ChangePasswordAtLogon` forcé — jamais de mot de passe fixe/prévisible.
+  `ChangePasswordAtLogon` forcé — jamais de mot de passe fixe/prévisible. Affiché uniquement
+  dans la sortie console de `New-Joiner.ps1` (à communiquer directement à la personne
+  concernée) : **jamais écrit dans un fichier persistant** — exclu du rapport de lot
+  `JML_Run_Report.csv`, qui peut être relu par d'autres que la personne qui l'a exécuté.
 - `Disable-Leaver.ps1` désactive le compte utilisateur ET, si un poste non rendu est déclaré,
   désactive aussi l'objet ordinateur correspondant (`Set-DeviceStatus.ps1 -Reason NonRendu`) —
   un compte désactivé ne bloque pas un poste qui garde une session locale en cache.
