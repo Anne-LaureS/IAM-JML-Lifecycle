@@ -118,6 +118,19 @@ ait exactement l'accès que les deux autres repos savent auditer et recertifier 
 Volontairement limité aux rôles "Standard"/"Lecture" — l'élévation vers un rôle Admin se
 demande séparément, le birthright reste du moindre privilège.
 
+## 🧪 Robustesse — cas limites testés
+
+Au-delà du scénario nominal ci-dessus, ces comportements sont vérifiés contre le lab réel (pas
+juste supposés) :
+
+| Cas | Résultat vérifié |
+|---|---|
+| CSV RH introuvable | Message d'erreur clair, arrêt immédiat, aucun prompt d'identifiants inutile |
+| `ActionType` inconnu dans une ligne | Ligne signalée en échec sans interrompre le reste du batch — voir [`sample-data/HR_Feed_BadActionType_Test.csv`](sample-data/HR_Feed_BadActionType_Test.csv) |
+| Département absent de `department-group-mapping.json` | Warning explicite, compte créé quand même, aucun groupe assigné (pas d'échec silencieux) |
+| Leaver sans matériel à traiter (`-AssetTag` omis) | Désactivation/déplacement normaux, aucune tentative sur un objet ordinateur |
+| `-WhatIf` isolé sur un compte réel existant | Toutes les actions AD affichées en simulation, rien modifié pour de vrai |
+
 ## 🔐 Sécurité & précautions
 
 - Comptes créés dans `OU=Utilisateurs,DC=society,DC=local` — une OU dédiée, vide, distincte à
