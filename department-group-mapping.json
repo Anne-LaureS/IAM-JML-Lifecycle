@@ -1,0 +1,10 @@
+﻿{
+  "Comptabilite": ["Comptabilite-Standard"],
+  "CRM": ["CRM-Lecture"],
+  "ERP": ["ERP-Utilisateur"],
+  "Juridique": ["Juridique-Standard"],
+  "Marketing": ["Marketing-Standard"],
+  "RH": ["RH-Standard"],
+  "SIRH": ["SIRH-Lecture"],
+  "Support-N3": ["Support-N3-Standard"]
+}

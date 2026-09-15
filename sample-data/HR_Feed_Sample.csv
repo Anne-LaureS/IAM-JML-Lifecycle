@@ -1,0 +1,7 @@
+﻿ActionType,FirstName,LastName,Department,OldDepartment,NewDepartment,SamAccountName,AssetTag,EquipmentReturned
+Joiner,Alice,Fontaine,CRM,,,,,
+Joiner,Karim,Benatia,RH,,,,,
+Mover,,,,CRM,ERP,afontaine,,
+DeviceLost,,,,,,,LAPTOP-AFONTAINE,
+DeviceFound,,,,,,,LAPTOP-AFONTAINE,
+Leaver,,,,,,kbenatia,LAPTOP-KBENATIA,false

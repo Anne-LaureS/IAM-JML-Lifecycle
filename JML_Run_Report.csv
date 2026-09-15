@@ -1,0 +1,7 @@
+﻿"ActionType","FirstName","LastName","SamAccountName","AssetTag","Status","Detail","Error"
+"Joiner","Alice","Fontaine","afontaine","","Success","FirstName : Alice LastName : Fontaine SamAccountName : afontaine Department : CRM GroupsAssigned : CRM-Lecture TempPassword : [REDACTED] Status : Success Error :",""
+"Joiner","Karim","Benatia","kbenatia","","Success","FirstName : Karim LastName : Benatia SamAccountName : kbenatia Department : RH GroupsAssigned : RH-Standard TempPassword : [REDACTED] Status : Success Error :",""
+"Mover","","","afontaine","","Success","SamAccountName : afontaine OldDepartment : CRM NewDepartment : ERP GroupsRemoved : CRM-Lecture GroupsAdded : ERP-Utilisateur Status : Success Error :",""
+"DeviceLost","","","","LAPTOP-AFONTAINE","Success","AssetTag : LAPTOP-AFONTAINE Reason : Perdu Action : Disabled Status : Success Error :",""
+"DeviceFound","","","","LAPTOP-AFONTAINE","Success","AssetTag : LAPTOP-AFONTAINE Reason : Retrouve Action : Enabled Status : Success Error :",""
+"Leaver","","","kbenatia","LAPTOP-KBENATIA","Success","SamAccountName : kbenatia GroupsRemoved : RH-Standard DeviceAction : LAPTOP-KBENATIA -> Disabled (Success) Status : Success Error :",""
