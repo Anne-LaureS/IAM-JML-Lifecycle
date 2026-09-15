@@ -174,19 +174,28 @@ simulation, rien modifié pour de vrai :
 - **Fichiers `.ps1`/`.json`/`.csv` en UTF-8 avec BOM** dès leur création, comme le reste du
   portfolio — Windows PowerShell 5.1 lit mal les accents sans ce marqueur en tête de fichier.
 
-## 🔮 V2 envisagée — synchronisation Okta
+## 🔮 V2 — synchronisation Okta
 
-**Pas encore implémenté.** AD reste la source de vérité ; l'idée est de répercuter chaque
-événement JML vers [Okta-SSO-Debug-Lab](https://github.com/Anne-LaureS/Okta-SSO-Debug-Lab)
-(même tenant, déjà configuré) pour que le provisioning AD et l'authentification fédérée restent
-cohérents. Vérifié au préalable : l'API Users Okta (création, désactivation, groupes) fait
-partie de la Lifecycle Management incluse dans le plan Integrator Free utilisé — pas une
-fonctionnalité entreprise verrouillée, contrairement à l'authentification déléguée AD envisagée
-puis écartée pour AD-LDAP-Bind-Debug-Lab.
+**Scripts écrits, pas encore testés contre un vrai tenant Okta** (voir Sécurité & précautions
+ci-dessus pour la discipline habituelle du portfolio : rien n'est présenté comme validé sans
+test réel — ce statut sera mis à jour une fois testé). AD reste la source de vérité ; l'idée est
+de répercuter chaque événement JML vers
+[Okta-SSO-Debug-Lab](https://github.com/Anne-LaureS/Okta-SSO-Debug-Lab) (même tenant, déjà
+configuré) pour que le provisioning AD et l'authentification fédérée restent cohérents. Vérifié
+au préalable : l'API Users Okta (création, désactivation, groupes) fait partie de la Lifecycle
+Management incluse dans le plan Integrator Free utilisé — pas une fonctionnalité entreprise
+verrouillée, contrairement à l'authentification déléguée AD envisagée puis écartée pour
+AD-LDAP-Bind-Debug-Lab.
 
-| Événement | Action AD (existante) | Action Okta envisagée | Endpoint Okta | Note |
+| Événement | Action AD (existante) | Script Okta (v2) | Endpoint Okta | Note |
 |---|---|---|---|---|
-| Joiner | `New-Joiner.ps1` : création compte + ajout groupe département | Création utilisateur + activation, ajout au groupe Okta du département | `POST /api/v1/users?activate=true` puis `PUT /api/v1/groups/{groupId}/users/{userId}` | Le login Okta doit correspondre à l'UPN AD (`sam@society.local`) pour corréler les deux comptes |
-| Mover | `Update-Mover.ps1` : retrait ancien groupe, ajout nouveau | Retrait de l'ancien groupe Okta, ajout au nouveau | `DELETE /api/v1/groups/{old}/users/{id}` puis `PUT /api/v1/groups/{new}/users/{id}` | Nécessite un mapping département → ID de groupe Okta, parallèle à `department-group-mapping.json` |
-| Leaver | `Disable-Leaver.ps1` : désactivation compte, retrait groupes, déplacement OU | Désactivation de l'utilisateur Okta | `POST /api/v1/users/{id}/lifecycle/deactivate` | Équivalent fonctionnel de `Disable-ADAccount` — récupérable via réactivation, pas une suppression |
+| Joiner | `New-Joiner.ps1` | [`Sync-OktaJoiner.ps1`](Sync-OktaJoiner.ps1) | `POST /api/v1/users?activate=true` puis `PUT /api/v1/groups/{groupId}/users/{userId}` | Le login Okta doit correspondre à l'UPN AD (`sam@society.local`) pour corréler les deux comptes |
+| Mover | `Update-Mover.ps1` | [`Sync-OktaMover.ps1`](Sync-OktaMover.ps1) | `DELETE /api/v1/groups/{old}/users/{id}` puis `PUT /api/v1/groups/{new}/users/{id}` | Réutilise `department-group-mapping.json` : les groupes Okta doivent porter exactement les mêmes noms que les groupes AD (résolution par nom via l'API, pas de fichier de correspondance séparé) |
+| Leaver | `Disable-Leaver.ps1` | [`Sync-OktaLeaver.ps1`](Sync-OktaLeaver.ps1) | `POST /api/v1/users/{id}/lifecycle/deactivate` | Équivalent fonctionnel de `Disable-ADAccount` — récupérable via réactivation, pas une suppression |
+| DeviceLost / DeviceFound | `Set-DeviceStatus.ps1` | — | — | Hors périmètre : Okta ne gère pas les objets ordinateur AD |
+
+Chaque script prend `-OktaOrgUrl` (URL du tenant, ex: `https://dev-12345.okta.com`) et
+`-ApiToken` (jeton API Okta en SecureString, généré dans Security > API > Tokens) — jamais en
+argument de ligne de commande en clair, même discipline que les mots de passe AD du reste du
+repo.
 | DeviceLost / DeviceFound | `Set-DeviceStatus.ps1` : active/désactive l'objet ordinateur AD | Hors périmètre | — | Okta ne gère pas les objets ordinateur AD ; la Devices API Okta couvre les appareils enrôlés MDM, un concept différent |
