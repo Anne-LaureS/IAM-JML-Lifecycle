@@ -123,13 +123,29 @@ demande séparément, le birthright reste du moindre privilège.
 Au-delà du scénario nominal ci-dessus, ces comportements sont vérifiés contre le lab réel (pas
 juste supposés) :
 
-| Cas | Résultat vérifié |
-|---|---|
-| CSV RH introuvable | Message d'erreur clair, arrêt immédiat, aucun prompt d'identifiants inutile |
-| `ActionType` inconnu dans une ligne | Ligne signalée en échec sans interrompre le reste du batch — voir [`sample-data/HR_Feed_BadActionType_Test.csv`](sample-data/HR_Feed_BadActionType_Test.csv) |
-| Département absent de `department-group-mapping.json` | Warning explicite, compte créé quand même, aucun groupe assigné (pas d'échec silencieux) |
-| Leaver sans matériel à traiter (`-AssetTag` omis) | Désactivation/déplacement normaux, aucune tentative sur un objet ordinateur |
-| `-WhatIf` isolé sur un compte réel existant | Toutes les actions AD affichées en simulation, rien modifié pour de vrai |
+**CSV RH introuvable** — message d'erreur clair, arrêt immédiat, aucun prompt d'identifiants inutile :
+
+![Test CSV introuvable](screenshots/test-csv-introuvable.png)
+
+**`ActionType` inconnu dans une ligne** — signalée en échec sans interrompre le reste du batch
+(voir [`sample-data/HR_Feed_BadActionType_Test.csv`](sample-data/HR_Feed_BadActionType_Test.csv)) :
+
+![Test ActionType inconnu](screenshots/test-actiontype-inconnu.png)
+
+**Département absent de `department-group-mapping.json`** — warning explicite, compte créé
+quand même, aucun groupe assigné (pas d'échec silencieux) :
+
+![Test département absent du mapping](screenshots/test-departement-absent.png)
+
+**Leaver sans matériel à traiter** (`-AssetTag` omis) — désactivation/déplacement normaux,
+aucune tentative sur un objet ordinateur :
+
+![Test leaver sans matériel](screenshots/test-leaver-sans-materiel.png)
+
+**`-WhatIf` isolé sur un compte réel existant** — toutes les actions AD affichées en
+simulation, rien modifié pour de vrai :
+
+![Test WhatIf isolé](screenshots/test-whatif-isole.png)
 
 ## 🔐 Sécurité & précautions
 
