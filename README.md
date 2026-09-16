@@ -2,6 +2,7 @@
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
 ![ActiveDirectory](https://img.shields.io/badge/Active%20Directory-0078D4?style=for-the-badge&logo=windows&logoColor=white)
+![Okta](https://img.shields.io/badge/Okta-007DC1?style=for-the-badge&logo=okta&logoColor=white)
 ![IAM](https://img.shields.io/badge/IAM-Identity%20Lifecycle-0d1117?style=for-the-badge)
 
 Automatisation Joiner/Mover/Leaver (JML) sur Active Directory — la brique qui referme le cycle
