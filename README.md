@@ -176,10 +176,10 @@ simulation, rien modifié pour de vrai :
 
 ## 🔮 V2 — synchronisation Okta
 
-**Joiner testé avec succès contre le tenant réel** (`Sync-OktaJoiner.ps1` — création,
-idempotence sur relance, résolution et assignation de groupe par nom, toutes vérifiées) ; Mover
-et Leaver encore à tester. AD reste la source de vérité ; l'idée est de répercuter chaque
-événement JML vers
+**Joiner et Mover testés avec succès contre le tenant réel** (`Sync-OktaJoiner.ps1` — création,
+idempotence sur relance, résolution et assignation de groupe par nom ; `Sync-OktaMover.ps1` —
+diff de groupes CRM → ERP appliqué correctement) ; Leaver encore à tester. AD reste la source de
+vérité ; l'idée est de répercuter chaque événement JML vers
 [Okta-SSO-Debug-Lab](https://github.com/Anne-LaureS/Okta-SSO-Debug-Lab) (même tenant, déjà
 configuré) pour que le provisioning AD et l'authentification fédérée restent cohérents. Vérifié
 au préalable : l'API Users Okta (création, désactivation, groupes) fait partie de la Lifecycle
@@ -200,6 +200,8 @@ argument de ligne de commande en clair, même discipline que les mots de passe A
 repo.
 
 ![Sync-OktaJoiner réussi contre le tenant réel](screenshots/okta-joiner-success.png)
+
+![Sync-OktaMover réussi contre le tenant réel](screenshots/okta-mover-success.png)
 
 **Note pratique validée** : les groupes Okta ne se créent pas automatiquement comme côté AD —
 il faut créer manuellement chaque groupe (`Directory > Groups` dans la console Okta) avec
