@@ -120,8 +120,7 @@ demande séparément, le birthright reste du moindre privilège.
 
 ## 🧪 Robustesse — cas limites testés
 
-Au-delà du scénario nominal ci-dessus, ces comportements sont vérifiés contre le lab réel (pas
-juste supposés) :
+Au-delà du scénario nominal ci-dessus, ces comportements sont vérifiés contre le lab réel :
 
 **CSV RH introuvable** — message d'erreur clair, arrêt immédiat, aucun prompt d'identifiants inutile :
 
