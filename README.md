@@ -14,6 +14,10 @@ réellement la création, la modification et la désactivation des comptes dans 
 Testé contre le même lab Active Directory (Windows Server 2022, `DC1.society.local`) que
 LDAP-App-Role-Audit.
 
+Gère l'appartenance aux groupes standard d'un compte sur la durée de son cycle de vie ; pour une
+appartenance **temporaire** à un groupe à privilège (accès juste-à-temps), voir
+[IAM-JIT-PAM](https://github.com/Anne-LaureS/IAM-JIT-PAM).
+
 ## ⚙️ Les scripts
 
 | # | Script | Rôle | Sortie |
