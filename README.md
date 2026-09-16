@@ -176,10 +176,10 @@ simulation, rien modifié pour de vrai :
 
 ## 🔮 V2 — synchronisation Okta
 
-**Scripts écrits, pas encore testés contre un vrai tenant Okta** (voir Sécurité & précautions
-ci-dessus pour la discipline habituelle du portfolio : rien n'est présenté comme validé sans
-test réel — ce statut sera mis à jour une fois testé). AD reste la source de vérité ; l'idée est
-de répercuter chaque événement JML vers
+**Joiner testé avec succès contre le tenant réel** (`Sync-OktaJoiner.ps1` — création,
+idempotence sur relance, résolution et assignation de groupe par nom, toutes vérifiées) ; Mover
+et Leaver encore à tester. AD reste la source de vérité ; l'idée est de répercuter chaque
+événement JML vers
 [Okta-SSO-Debug-Lab](https://github.com/Anne-LaureS/Okta-SSO-Debug-Lab) (même tenant, déjà
 configuré) pour que le provisioning AD et l'authentification fédérée restent cohérents. Vérifié
 au préalable : l'API Users Okta (création, désactivation, groupes) fait partie de la Lifecycle
@@ -199,9 +199,9 @@ Chaque script prend `-OktaOrgUrl` (URL du tenant, ex: `https://dev-12345.okta.co
 argument de ligne de commande en clair, même discipline que les mots de passe AD du reste du
 repo.
 
-**Prochaine étape (à faire avant de tester)** : `-OktaOrgUrl` est déjà connu
-(`https://integrator-5794983.okta.com`, repris de
-[Okta-SSO-Debug-Lab](https://github.com/Anne-LaureS/Okta-SSO-Debug-Lab)/`iam-debug/environments/demo.bru`)
-— il reste à générer un jeton API dans la console Okta (Security > API > Tokens) pour lancer les
-premiers tests réels.
+![Sync-OktaJoiner réussi contre le tenant réel](screenshots/okta-joiner-success.png)
+
+**Note pratique validée** : les groupes Okta ne se créent pas automatiquement comme côté AD —
+il faut créer manuellement chaque groupe (`Directory > Groups` dans la console Okta) avec
+exactement le même nom que son équivalent AD avant de synchroniser un département donné.
 | DeviceLost / DeviceFound | `Set-DeviceStatus.ps1` : active/désactive l'objet ordinateur AD | Hors périmètre | — | Okta ne gère pas les objets ordinateur AD ; la Devices API Okta couvre les appareils enrôlés MDM, un concept différent |
