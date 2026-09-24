@@ -29,8 +29,9 @@
 .PARAMETER UsersContainer
     OU où créer le compte. OU=Utilisateurs,DC=society,DC=local par défaut — une OU dédiée,
     vide, distincte à la fois de CN=Users (conteneur intégré, contient les objets système par
-    défaut comme Administrator/Domain Admins) et de OU=Utilisateurs-Test (qui contient les 21
-    comptes de démo LDAP-App-Role-Audit, à ne pas mélanger).
+    défaut comme Administrator/Domain Admins). Les 21 comptes de démo de LDAP-App-Role-Audit y
+    sont fusionnés (Expand-LabApplications.ps1 -Step MergeUsers) : une seule OU d'identités.
+    OU=Utilisateurs-Test ne garde que les comptes de test jetables.
 
 .PARAMETER GroupMappingJson
     Fichier JSON Département -> liste de groupes (department-group-mapping.json par défaut).

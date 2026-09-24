@@ -1,0 +1,8 @@
+ParentGroup,ChildGroup,Note
+CoreBanking-Admin,G-ROLE-COREBANKING-ADMIN,Profil admin Coeur bancaire
+Paiements-Admin,G-ROLE-PAIEMENTS-ADMIN,Profil admin Paiements
+Credit-Admin,G-ROLE-CREDIT-ADMIN,Profil admin Crédit
+KYC-Admin,G-ROLE-KYC-ADMIN,Profil admin KYC
+Tresorerie-Admin,G-ROLE-TRESORERIE-ADMIN,Profil admin Trésorerie
+Monetique-Admin,G-ROLE-MONETIQUE-ADMIN,Profil admin Monétique
+Achats-Admin,G-ROLE-ACHATS-ADMIN,Profil admin Achats

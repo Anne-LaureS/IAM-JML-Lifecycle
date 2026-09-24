@@ -1,0 +1,13 @@
+﻿Share,Group,Access,Description
+Agences,R-SHARE-AGENCES-RW,Modify,Partage Agences - accès via R-SHARE-AGENCES-RW
+Credit,R-SHARE-CREDIT-RW,Modify,Partage Credit - accès via R-SHARE-CREDIT-RW
+Conformite,R-SHARE-CONFORMITE-RW,Modify,Partage Conformite - accès via R-SHARE-CONFORMITE-RW
+Paiements,R-SHARE-PAIEMENTS-RW,Modify,Partage Paiements - accès via R-SHARE-PAIEMENTS-RW
+Tresorerie,R-SHARE-TRESORERIE-RW,Modify,Partage Tresorerie - accès via R-SHARE-TRESORERIE-RW
+Risques,R-SHARE-RISQUES-RW,Modify,Partage Risques - accès via R-SHARE-RISQUES-RW
+Monetique,R-SHARE-MONETIQUE-RW,Modify,Partage Monetique - accès via R-SHARE-MONETIQUE-RW
+Audit-Interne,R-SHARE-AUDIT-RO,Read,Partage Audit-Interne - accès via R-SHARE-AUDIT-RO
+Direction,R-SHARE-DIRECTION-RW,Modify,Partage Direction - accès via R-SHARE-DIRECTION-RW
+SecOps,R-SHARE-SECOPS-RW,Modify,Partage SecOps - accès via R-SHARE-SECOPS-RW
+Dev,R-SHARE-DEV-RW,Modify,Partage Dev - accès via R-SHARE-DEV-RW
+Achats,R-SHARE-ACHATS-RW,Modify,Partage Achats - accès via R-SHARE-ACHATS-RW

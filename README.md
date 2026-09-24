@@ -1,4 +1,4 @@
-# 🔄 IAM JML Lifecycle
+﻿# 🔄 IAM JML Lifecycle
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
 ![ActiveDirectory](https://img.shields.io/badge/Active%20Directory-0078D4?style=for-the-badge&logo=windows&logoColor=white)
@@ -27,6 +27,7 @@ appartenance **temporaire** à un groupe à privilège (accès juste-à-temps), 
 | — | [`Disable-Leaver.ps1`](Disable-Leaver.ps1) | Retire tous les accès, désactive le compte, le déplace dans OU=Leavers | Objet résultat (groupes retirés, action matériel éventuelle) |
 | — | [`Set-DeviceStatus.ps1`](Set-DeviceStatus.ps1) | Active/désactive un objet ordinateur AD (perdu/retrouvé/non rendu) | Objet résultat (action, statut) |
 | — | [`Invoke-JMLBatch.ps1`](Invoke-JMLBatch.ps1) | Orchestrateur : lit un CSV RH et dispatche chaque ligne vers le script adapté | `JML_Run_Report_AAAA-MM-JJ.csv` |
+| — | [`Expand-LabApplications.ps1`](Expand-LabApplications.ps1) | Enrichit le lab AD : applications/rôles, comptes admin/service/dormants, groupes AGDLP, partages (voir la section dédiée) | Rapport `Expand-LabApplications_Report_AAAA-MM-JJ.csv` |
 
 Les 4 premiers scripts sont indépendants et directement utilisables un par un (paramètres
 explicites, pas besoin de passer par l'orchestrateur pour traiter un seul cas). L'orchestrateur
@@ -151,12 +152,120 @@ simulation, rien modifié pour de vrai :
 
 ![Test WhatIf isolé](screenshots/test-whatif-isole.png)
 
+## 🏦 Enrichissement du lab AD (univers bancaire)
+
+Le lab initial (21 comptes, 8 applications) a permis de valider chaque outil séparément. Pour les
+éprouver ensemble sur des cas réalistes, l'annuaire a été enrichi pour couvrir une activité IAM
+complète. Plutôt que de créer un annuaire à côté, l'existant a été **étendu** : mêmes OU
+(`OU=Applications`, `OU=Utilisateurs`), même schéma application → rôles → membres, même
+pipeline JML pour créer les personnes. Le script
+[`Expand-LabApplications.ps1`](Expand-LabApplications.ps1) ajoute ce que le cycle JML ne crée pas
+(applications, rôles, comptes privilégiés, groupes, partages), à partir de fichiers de données
+`sample-data\Lab_*.csv`. Il est **rejouable** : ce qui existe est constaté (`Exists`), seul ce qui
+manque est créé, rien n'est supprimé ni écrasé.
+
+### Prérequis
+
+- Module **ActiveDirectory** (RSAT) sur le poste qui lance le script, et un compte administrateur
+  saisi **avec le préfixe du domaine** (`SOCIETY\Administrateur`). Les identifiants sont vérifiés
+  au démarrage : si vides ou refusés, le script s'arrête tout de suite au lieu de produire une
+  erreur par ligne.
+- **WinRM, uniquement pour `-Step Shares`.** La création des dossiers partagés s'exécute sur le
+  serveur via `Invoke-Command`. Depuis un poste **non membre du domaine**, WinRM refuse la
+  connexion tant que le serveur n'est pas dans la liste `TrustedHosts` du client (PowerShell en
+  administrateur) :
+
+  ```powershell
+  Set-Item WSMan:\localhost\Client\TrustedHosts -Value "DC1.society.local" -Concatenate -Force
+  ```
+
+  Acceptable sur un lab isolé ; en production, préférer un poste joint au domaine (Kerberos) ou
+  WinRM en HTTPS. `TrustedHosts` désactive l'authentification du serveur pour cet hôte.
+- **Windows en français** : les comptes intégrés (`Administrateurs`, `Admins du domaine`) sont
+  désignés par leur **SID** et non par leur nom, sinon la résolution des comptes échoue
+  (`Le mappage entre les noms de compte et les ID de sécurité n'a pas été effectué`).
+
+### Ce qui a été ajouté (relevé sur le lab)
+
+| Élément | Volume | Source |
+|---|---|---|
+| Applications (OU) et rôles (groupes) | 12 nouvelles OU, 40 groupes-rôles → **20 applications** au total | `Lab_Applications.csv` |
+| Utilisateurs « métier » | **55 joiners** dans 15 nouveaux départements (Agences, Crédit, Conformité, Paiements, Trésorerie, Back-Office, Risques, Monétique, Audit interne, Direction, IT, Sécurité, Helpdesk, Développeurs, Achats) | `HR_Feed_Banque.csv` + `department-group-mapping.json` |
+| Comptes spéciaux | 7 comptes admin (`adm-*`, dans `OU=Admins`), 4 comptes de service (`svc-*`), 6 comptes dormants/orphelins | `Lab_Accounts.csv` |
+| Groupes AGDLP | 15 groupes `G-<Département>`, 7 profils `G-ROLE-*` (admins), 12 groupes domaine local `R-SHARE-*` | `Lab_Groups.csv`, `Lab_Nesting.csv` |
+| Partages réels | 12 dossiers partagés dont les permissions pointent sur les `R-SHARE-*` | `Lab_Shares.csv` |
+| Anomalies volontaires | 16 scénarios (SoD, cumul d'admins, mover mal traité, rôles vides, leaver sans matériel, comptes dormants, accès indirect via groupe imbriqué) | [`Lab_ANOMALIES.md`](sample-data/Lab_ANOMALIES.md) |
+
+Les 21 comptes de démo de LDAP-App-Role-Audit ont été **fusionnés** dans `OU=Utilisateurs`
+(une seule OU d'identités, comme en entreprise). `OU=Utilisateurs-Test` ne garde que les comptes
+de test jetables (scénarios de bind, compte du coffre-fort).
+
+![Applications du lab, 20 OU sous OU=Applications](screenshots/lab-applications-ou.png)
+
+![Propriétés de l'OU Credit : la description est posée par le script](screenshots/lab-ou-credit-proprietes.png)
+
+![OU=Utilisateurs après fusion : joiners, comptes de démo et comptes spéciaux](screenshots/lab-utilisateurs-fusion.png)
+
+### La chaîne AGDLP (Compte → Global → Domaine local → Permission)
+
+Un utilisateur accède à un partage uniquement via `G-<Département>` → `R-SHARE-*` → permissions du
+dossier partagé. Ces groupes ne sont **pas** imbriqués dans les rôles applicatifs, sauf les profils
+admin `G-ROLE-*` (voir plus bas).
+
+![Membres de G-Credit (dont le mover Nicolas Perrin)](screenshots/lab-g-credit-membres.png)
+
+![R-SHARE-CREDIT-RW contient G-Credit](screenshots/lab-r-share-credit-membres.png)
+
+![Permissions du partage \\DC1\Credit : R-SHARE-CREDIT-RW, Système et Administrateurs](screenshots/lab-partage-credit-securite.png)
+
+Les comptes `adm-*` ne sont plus membres directs des rôles Admin : ils sont dans un profil
+`G-ROLE-*`, lui-même membre du rôle (`-Step Nesting`). L'accès est donc **indirect** : il n'apparaît
+comme une personne dans l'audit qu'avec `Get-LdapAppRoleAudit.ps1 -ResolveNested` (voir
+[LDAP-App-Role-Audit](https://github.com/Anne-LaureS/LDAP-App-Role-Audit)).
+
+![Le rôle Credit-Admin ne contient qu'un groupe : G-ROLE-CREDIT-ADMIN](screenshots/lab-credit-admin-imbrication.png)
+
+![Le profil G-ROLE-CREDIT-ADMIN ne contient que adm-snguyen](screenshots/lab-g-role-credit-admin-membres.png)
+
+### Ordre d'exécution
+
+Chaque étape se lance d'abord avec `-WhatIf`, puis pour de vrai. Le « Résumé » final compte les
+`Created` / `Exists` / `Skipped` / `Failed`.
+
+Le lot JML (`HR_Feed_Banque.csv`) ne se lance **qu'une seule fois** et **après** `-Step Apps` : `New-Joiner.ps1` crée le compte avant de l'ajouter aux groupes, et le rejouer créerait des doublons (`croussel2`). `-Step Birthright` rattrape les groupes de base de comptes déjà créés et tient compte du département actuel des movers.
+
+```powershell
+.\Expand-LabApplications.ps1 -Step Apps          # OU applications + groupes-rôles
+.\Expand-LabApplications.ps1 -Step Computers     # objets ordinateur des AssetTag du flux RH
+.\Expand-LabApplications.ps1 -Step MergeUsers    # fusion des comptes de démo dans OU=Utilisateurs
+.\Invoke-JMLBatch.ps1 -HRFeedCsv .\sample-data\HR_Feed_Banque.csv   # les 55 joiners (une seule fois)
+.\Expand-LabApplications.ps1 -Step Birthright    # groupes de base (voir retour d'expérience)
+.\Invoke-JMLBatch.ps1 -HRFeedCsv .\sample-data\HR_Feed_Banque_Reprise.csv   # movers + matériel
+.\Expand-LabApplications.ps1 -Step Accounts      # comptes admin, service, dormants
+.\Expand-LabApplications.ps1 -Step Memberships   # appartenances de rôle, dont les anomalies
+.\Expand-LabApplications.ps1 -Step Groups        # G-*, G-ROLE-*, R-*
+.\Expand-LabApplications.ps1 -Step Nesting       # profils admin dans les rôles Admin
+.\Expand-LabApplications.ps1 -Step Shares        # dossiers partagés + permissions
+```
+
+![Étape Shares : 12 partages créés](screenshots/lab-shares-resume.png)
+
+### Limites connues
+
+- Les comptes dormants ne portent pas de vraie date de dernière connexion : `lastLogonTimestamp`
+  n'est pas modifiable dans AD, l'ancienneté est portée par la description du compte.
+- L'anomalie A12 (comptes dormants, orphelins, leavers encore actifs) n'est détectée par aucun
+  outil du portfolio à ce stade.
+- La chaîne AGDLP (partages) n'est vérifiée par aucun outil du portfolio : c'est une base réaliste,
+  pas une anomalie.
+
 ## 🔐 Sécurité & précautions
 
-- Comptes créés dans `OU=Utilisateurs,DC=society,DC=local` — une OU dédiée, vide, distincte à
-  la fois de `CN=Users` (conteneur intégré : Administrator, Domain Admins, et autres objets
-  système par défaut) et de `OU=Utilisateurs-Test` qui contient les 21 comptes de démo
-  LDAP-App-Role-Audit (on ne veut mélanger ni l'un ni l'autre).
+- Comptes créés dans `OU=Utilisateurs,DC=society,DC=local` — une OU d'identités unique, distincte de
+  `CN=Users` (conteneur intégré : Administrator, Domain Admins, et autres objets système par
+  défaut). Les 21 comptes de démo de LDAP-App-Role-Audit y ont été fusionnés
+  (`Expand-LabApplications.ps1 -Step MergeUsers`) ; `OU=Utilisateurs-Test` ne garde que les
+  comptes de test jetables (scénarios de bind, compte de test du coffre-fort).
 - Écritures via le module `ActiveDirectory` (`New-ADUser`, `Add/Remove-ADPrincipalGroupMembership`,
   `Disable/Enable-ADAccount`...) plutôt que du LDAP brut comme LDAP-App-Role-Audit — ce dernier
   reste agnostique du schéma pour un usage en lecture seule, mais pour des écritures réelles

@@ -1,10 +1,82 @@
-﻿{
-  "Comptabilite": ["Comptabilite-Standard"],
-  "CRM": ["CRM-Lecture"],
-  "ERP": ["ERP-Utilisateur"],
-  "Juridique": ["Juridique-Standard"],
-  "Marketing": ["Marketing-Standard"],
-  "RH": ["RH-Standard"],
-  "SIRH": ["SIRH-Lecture"],
-  "Support-N3": ["Support-N3-Standard"]
+{
+  "Comptabilite": [
+    "Comptabilite-Standard"
+  ],
+  "CRM": [
+    "CRM-Lecture"
+  ],
+  "ERP": [
+    "ERP-Utilisateur"
+  ],
+  "Juridique": [
+    "Juridique-Standard"
+  ],
+  "Marketing": [
+    "Marketing-Standard"
+  ],
+  "RH": [
+    "RH-Standard"
+  ],
+  "SIRH": [
+    "SIRH-Lecture"
+  ],
+  "Support-N3": [
+    "Support-N3-Standard"
+  ],
+  "Agences": [
+    "CoreBanking-Consultation",
+    "CRM-Lecture"
+  ],
+  "Credit": [
+    "Credit-Analyste",
+    "CoreBanking-Consultation"
+  ],
+  "Conformite": [
+    "KYC-Analyste"
+  ],
+  "Paiements": [
+    "Paiements-Initiateur",
+    "CoreBanking-Consultation"
+  ],
+  "Tresorerie": [
+    "Tresorerie-FrontOffice"
+  ],
+  "Back-Office": [
+    "Tresorerie-BackOffice",
+    "CoreBanking-Operateur"
+  ],
+  "Risques": [
+    "Risques-Analyste",
+    "Credit-Consultation"
+  ],
+  "Monetique": [
+    "Monetique-Operateur"
+  ],
+  "Audit-Interne": [
+    "Risques-Consultation",
+    "Credit-Consultation",
+    "KYC-Consultation",
+    "Paiements-Consultation",
+    "CoreBanking-Consultation",
+    "Monetique-Consultation"
+  ],
+  "Direction": [
+    "CoreBanking-Consultation",
+    "Risques-Consultation"
+  ],
+  "IT": [
+    "IT-Standard"
+  ],
+  "Securite": [
+    "SecOps-Analyste"
+  ],
+  "Helpdesk": [
+    "Helpdesk-Standard"
+  ],
+  "Developpeurs": [
+    "Dev-Standard"
+  ],
+  "Achats": [
+    "Achats-Lecture"
+  ]
 }

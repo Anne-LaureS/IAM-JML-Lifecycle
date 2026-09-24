@@ -1,0 +1,35 @@
+﻿Group,Scope,Path,Description,Department,MemberSams,MemberGroups
+G-Agences,Global,"OU=Groupes,DC=society,DC=local",Département Agences - groupe global de population,Agences,,
+G-Credit,Global,"OU=Groupes,DC=society,DC=local",Département Credit - groupe global de population,Credit,,
+G-Conformite,Global,"OU=Groupes,DC=society,DC=local",Département Conformite - groupe global de population,Conformite,,
+G-Paiements,Global,"OU=Groupes,DC=society,DC=local",Département Paiements - groupe global de population,Paiements,,
+G-Tresorerie,Global,"OU=Groupes,DC=society,DC=local",Département Tresorerie - groupe global de population,Tresorerie,,
+G-BackOffice,Global,"OU=Groupes,DC=society,DC=local",Département Back-Office - groupe global de population,Back-Office,,
+G-Risques,Global,"OU=Groupes,DC=society,DC=local",Département Risques - groupe global de population,Risques,,
+G-Monetique,Global,"OU=Groupes,DC=society,DC=local",Département Monetique - groupe global de population,Monetique,,
+G-AuditInterne,Global,"OU=Groupes,DC=society,DC=local",Département Audit-Interne - groupe global de population,Audit-Interne,,
+G-Direction,Global,"OU=Groupes,DC=society,DC=local",Département Direction - groupe global de population,Direction,,
+G-IT,Global,"OU=Groupes,DC=society,DC=local",Département IT - groupe global de population,IT,,
+G-Securite,Global,"OU=Groupes,DC=society,DC=local",Département Securite - groupe global de population,Securite,,
+G-Helpdesk,Global,"OU=Groupes,DC=society,DC=local",Département Helpdesk - groupe global de population,Helpdesk,,
+G-Dev,Global,"OU=Groupes,DC=society,DC=local",Département Developpeurs - groupe global de population,Developpeurs,,
+G-Achats,Global,"OU=Groupes,DC=society,DC=local",Département Achats - groupe global de population,Achats,,
+G-ROLE-COREBANKING-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-cbonnin;cdurand,
+G-ROLE-PAIEMENTS-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-mfabre,
+G-ROLE-CREDIT-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-snguyen,
+G-ROLE-KYC-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-pmartel,
+G-ROLE-TRESORERIE-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-lroux,
+G-ROLE-MONETIQUE-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-kdupuis,
+G-ROLE-ACHATS-ADMIN,Global,"OU=Groupes,DC=society,DC=local",Profil administrateur - comptes adm-* concernés,,adm-ebarbier,
+R-SHARE-AGENCES-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Agences
+R-SHARE-CREDIT-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Credit
+R-SHARE-CONFORMITE-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Conformite
+R-SHARE-PAIEMENTS-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Paiements
+R-SHARE-TRESORERIE-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Tresorerie;G-BackOffice
+R-SHARE-RISQUES-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Risques
+R-SHARE-MONETIQUE-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Monetique
+R-SHARE-AUDIT-RO,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-AuditInterne
+R-SHARE-DIRECTION-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Direction
+R-SHARE-SECOPS-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Securite
+R-SHARE-DEV-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Dev
+R-SHARE-ACHATS-RW,DomainLocal,"OU=Ressources,DC=society,DC=local",Accès ressource - groupe domaine local (AGDLP),,,G-Achats

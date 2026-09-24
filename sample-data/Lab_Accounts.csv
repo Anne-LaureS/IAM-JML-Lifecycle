@@ -1,0 +1,18 @@
+﻿SamAccountName,FirstName,LastName,Department,Enabled,Description,TargetOU
+adm-cbonnin,Christophe,Bonnin,IT,true,Compte administrateur dédié - Christophe Bonnin (IT),"OU=Admins,DC=society,DC=local"
+adm-mfabre,Mathieu,Fabre,IT,true,Compte administrateur dédié - Mathieu Fabre (IT),"OU=Admins,DC=society,DC=local"
+adm-snguyen,Sophie,Nguyen,IT,true,Compte administrateur dédié - Sophie Nguyen (IT),"OU=Admins,DC=society,DC=local"
+adm-pmartel,Pierre,Martel,IT,true,Compte administrateur dédié - Pierre Martel (IT),"OU=Admins,DC=society,DC=local"
+adm-lroux,Laurent,Roux,IT,true,Compte administrateur dédié - Laurent Roux (IT),"OU=Admins,DC=society,DC=local"
+adm-kdupuis,Karine,Dupuis,IT,true,Compte administrateur dédié - Karine Dupuis (IT),"OU=Admins,DC=society,DC=local"
+adm-ebarbier,Etienne,Barbier,IT,true,Compte administrateur dédié - Etienne Barbier (IT),"OU=Admins,DC=society,DC=local"
+svc-backup,Service,Backup,IT,true,Compte de service - sauvegardes,
+svc-monitoring,Service,Monitoring,IT,true,Compte de service - supervision,
+svc-batch-sepa,Service,BatchSepa,IT,true,Compte de service - traitement batch des virements SEPA,
+svc-deploy,Service,Deploy,IT,true,Compte de service - déploiement applicatif,
+legacy-admin,Legacy,Admin,IT,true,Compte administrateur historique - dernière connexion 2023-03-14,
+former-employee,Ancien,Collaborateur,Paiements,true,Ancien collaborateur - départ le 2024-01-31 - compte non désactivé,
+old-user01,Ancien,Utilisateur01,Credit,false,Compte dormant - aucune connexion depuis 2023,
+old-user02,Ancien,Utilisateur02,Agences,true,Compte dormant - aucune connexion depuis 2023-06,
+stagiaire-2023,Stagiaire,Conformite2023,Conformite,true,Stagiaire - fin de stage 2023-09 - compte toujours actif,
+test-user,Compte,Test,IT,true,Compte de test laissé en place après recette,

@@ -1,0 +1,41 @@
+﻿Application,AppDescription,Role,RoleDescription
+CoreBanking,Application Coeur bancaire - comptes et mouvements,CoreBanking-Consultation,Rôle Consultation Coeur bancaire - lecture seule
+CoreBanking,Application Coeur bancaire - comptes et mouvements,CoreBanking-Operateur,Rôle Opérateur Coeur bancaire - saisie des opérations courantes
+CoreBanking,Application Coeur bancaire - comptes et mouvements,CoreBanking-Admin,Rôle Administrateur Coeur bancaire - paramétrage et accès complet
+Credit,Application Octroi de crédit,Credit-Consultation,Rôle Consultation Crédit - lecture des dossiers
+Credit,Application Octroi de crédit,Credit-Analyste,Rôle Analyste Crédit - instruction des dossiers
+Credit,Application Octroi de crédit,Credit-Decisionnaire,Rôle Décisionnaire Crédit - accord ou refus du financement
+Credit,Application Octroi de crédit,Credit-Admin,Rôle Administrateur Crédit - accès complet
+Credit,Application Octroi de crédit,Credit-Legacy-Admin,Rôle historique Administrateur Crédit - ancien moteur de décision
+KYC-LCBFT,Application Conformité KYC et lutte anti-blanchiment,KYC-Consultation,Rôle Consultation KYC - lecture des dossiers clients
+KYC-LCBFT,Application Conformité KYC et lutte anti-blanchiment,KYC-Analyste,Rôle Analyste KYC - instruction des alertes et dossiers
+KYC-LCBFT,Application Conformité KYC et lutte anti-blanchiment,KYC-Validateur,Rôle Validateur KYC - validation finale de l'identité et du risque client
+KYC-LCBFT,Application Conformité KYC et lutte anti-blanchiment,KYC-Admin,Rôle Administrateur KYC - accès complet
+Paiements-SEPA,Application Paiements SEPA et virements,Paiements-Consultation,Rôle Consultation Paiements - lecture des ordres
+Paiements-SEPA,Application Paiements SEPA et virements,Paiements-Initiateur,Rôle Initiateur Paiements - saisie des ordres de virement
+Paiements-SEPA,Application Paiements SEPA et virements,Paiements-Validateur,Rôle Validateur Paiements - validation des ordres (principe des 4 yeux)
+Paiements-SEPA,Application Paiements SEPA et virements,Paiements-Admin,Rôle Administrateur Paiements - accès complet
+Tresorerie-Marches,Application Trésorerie et salle des marchés,Tresorerie-FrontOffice,Rôle Front-office Trésorerie - négociation des opérations
+Tresorerie-Marches,Application Trésorerie et salle des marchés,Tresorerie-BackOffice,Rôle Back-office Trésorerie - confirmation et règlement des opérations
+Tresorerie-Marches,Application Trésorerie et salle des marchés,Tresorerie-Admin,Rôle Administrateur Trésorerie - accès complet
+Risques,Application Suivi des risques,Risques-Consultation,Rôle Consultation Risques - lecture des expositions
+Risques,Application Suivi des risques,Risques-Analyste,Rôle Analyste Risques - production des indicateurs et limites
+Risques,Application Suivi des risques,Risques-Admin,Rôle Administrateur Risques - accès complet
+Monetique,Application Monétique et cartes bancaires,Monetique-Consultation,Rôle Consultation Monétique - lecture des dossiers cartes
+Monetique,Application Monétique et cartes bancaires,Monetique-Operateur,Rôle Opérateur Monétique - gestion des cartes et oppositions
+Monetique,Application Monétique et cartes bancaires,Monetique-Admin,Rôle Administrateur Monétique - accès complet
+Monetique,Application Monétique et cartes bancaires,Monetique-Legacy-Operateur,Rôle historique Opérateur Monétique - ancien serveur de cartes
+Comptabilite,Application Comptabilite,Comptabilite-Approbateur,Rôle Approbateur Comptabilite - validation des écritures
+CRM,Application CRM,CRM-Manager,Role Manager CRM - pilotage de l'équipe commerciale
+ERP,Application ERP,ERP-Approbateur,Role Approbateur ERP - validation des commandes
+Achats,Application Achats et fournisseurs,Achats-Lecture,Rôle Lecture Achats - consultation des commandes
+Achats,Application Achats et fournisseurs,Achats-Manager,Rôle Manager Achats - engagement des commandes et fournisseurs
+Achats,Application Achats et fournisseurs,Achats-Admin,Rôle Administrateur Achats - accès complet
+ITSM,Application Gestion des services IT,IT-Standard,Rôle Utilisateur IT - traitement des demandes courantes
+ITSM,Application Gestion des services IT,IT-Admin,Rôle Administrateur IT - accès complet à l'infrastructure
+SecOps,Application Sécurité opérationnelle (SIEM/SOC),SecOps-Analyste,Rôle Analyste SecOps - lecture et qualification des alertes
+SecOps,Application Sécurité opérationnelle (SIEM/SOC),Security-Admin,Rôle Administrateur Sécurité - configuration des outils de sécurité
+DevOps,Application Chaîne de développement et déploiement,Dev-Standard,Rôle Développeur - accès aux dépôts et à l'intégration continue
+DevOps,Application Chaîne de développement et déploiement,Dev-Admin,Rôle Administrateur DevOps - accès complet aux pipelines et environnements
+Helpdesk,Application Support utilisateurs N1/N2,Helpdesk-Standard,Rôle Utilisateur Helpdesk - traitement des tickets
+Helpdesk,Application Support utilisateurs N1/N2,Helpdesk-Admin,Rôle Administrateur Helpdesk - accès complet

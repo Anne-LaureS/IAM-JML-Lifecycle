@@ -1,0 +1,4 @@
+# Traces d'execution generees a chaque lancement (rapports datés) : ne pas publier.
+# JML_Run_Report.csv (sans date) reste suivi : c'est l'exemple du README.
+Expand-LabApplications_Report_*.csv
+JML_Run_Report_20*.csv

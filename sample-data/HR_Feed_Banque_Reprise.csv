@@ -1,0 +1,5 @@
+ActionType,FirstName,LastName,Department,OldDepartment,NewDepartment,SamAccountName,AssetTag,EquipmentReturned
+Mover,,,,Agences,Credit,nperrin,,
+Mover,,,,Agences,Conformite,hguerin,,
+DeviceLost,,,,,,,LAPTOP-TLAMBERT,
+DeviceFound,,,,,,,LAPTOP-TLAMBERT,
