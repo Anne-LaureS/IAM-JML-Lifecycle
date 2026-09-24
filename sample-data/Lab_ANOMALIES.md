@@ -21,7 +21,7 @@ manifeste sert de jeu de tests : après avoir relancé les outils, chaque ligne 
 | A14 | SoD DevOps : Admin Dev + Admin Coeur bancaire (production) | `eriou` | `Find-SoDViolations.ps1` |
 | A15 | SoD Achats : Manager Achats + Approbateur Comptabilité | `slopes` | `Find-SoDViolations.ps1` |
 | A16 | SoD masqué par groupe imbriqué : `cdurand` (Validateur Paiements) ajouté par erreur au profil `G-ROLE-COREBANKING-ADMIN`, donc Admin Coeur bancaire indirect | `cdurand` | `Find-SoDViolations.ps1` sur un audit produit avec `Get-LdapAppRoleAudit.ps1 -ResolveNested` (invisible sans ce commutateur) |
-| A12 | Comptes dormants / orphelins avec accès conservés | `legacy-admin`, `former-employee`, `old-user01`, `old-user02`, `stagiaire-2023`, `test-user` | **Non couvert par les outils actuels** : candidat à une évolution (détection de comptes dormants) |
+| A12 | Comptes dormants / orphelins avec accès conservés | `legacy-admin`, `former-employee`, `old-user01`, `old-user02`, `stagiaire-2023`, `test-user` | `Find-DormantAccounts.ps1` (IAM-Access-Recertification) : orphelins (`legacy-admin`, `old-user02`, `test-user`, `old-user01`), leavers encore actifs (`former-employee`, `stagiaire-2023`) et compte désactivé avec accès (`old-user01`) |
 
 Cas témoins sans anomalie : `nperrin` (mover propre), `llemaire` (leaver propre, matériel rendu),
 `tlambert` (matériel perdu puis retrouvé).
